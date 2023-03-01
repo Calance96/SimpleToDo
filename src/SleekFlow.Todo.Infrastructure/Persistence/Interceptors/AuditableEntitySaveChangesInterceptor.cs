@@ -19,14 +19,17 @@ internal sealed class AuditableEntitySaveChangesInterceptor : SaveChangesInterce
 		_currentUserService = currentUserService;
 	}
 
-	public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
+	public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
+		DbContextEventData eventData,
+		InterceptionResult<int> result,
+		CancellationToken cancellationToken = default)
 	{
-		SetEntitiesMetada(eventData.Context);
+		SetEntitiesMetadata(eventData.Context);
 
 		return base.SavingChangesAsync(eventData, result, cancellationToken);
 	}
 
-	private void SetEntitiesMetada(DbContext? context)
+	private void SetEntitiesMetadata(DbContext? context)
 	{
 		if (context is null)
 		{
