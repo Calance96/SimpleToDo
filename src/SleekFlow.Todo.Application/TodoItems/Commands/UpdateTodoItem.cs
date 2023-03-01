@@ -4,7 +4,6 @@ using Mapster;
 using MediatR;
 using SleekFlow.Todo.Application.Common.Exceptions;
 using SleekFlow.Todo.Application.Common.Interfaces;
-using SleekFlow.Todo.Application.TodoItems.Dtos;
 using SleekFlow.Todo.Domain.Constants;
 using SleekFlow.Todo.Domain.Entities;
 using SleekFlow.Todo.Domain.Enums;
@@ -15,7 +14,7 @@ public sealed record UpdateTodoItem(
 	Guid ItemId,
 	string Name,
 	string Description,
-	TodoItemStatus Status,
+	TodoItemStatus? Status,
 	DateTimeOffset? DueDate) : IRequest<ErrorOr<Unit>>;
 
 internal sealed class UpdateTodoItemValidator : AbstractValidator<UpdateTodoItem>
@@ -39,6 +38,10 @@ internal sealed class UpdateTodoItemValidator : AbstractValidator<UpdateTodoItem
 				.WithMessage("{PropertyName} cannot be empty")
 			.MaximumLength(DomainConstants.TodoItem.DescriptionMaxLength)
 				.WithMessage("{PropertyName} cannot exceed {MaxLength} characters.");
+
+		RuleFor(request => request.Status)
+			.Must(status => status.HasValue)
+				.WithMessage("{PropertyName} must be provided.");
 
 		RuleFor(request => request.DueDate)
 			.Must(dueDate => dueDate!.Value >= DateTimeOffset.UtcNow)

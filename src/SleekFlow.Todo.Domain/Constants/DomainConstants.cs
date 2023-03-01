@@ -12,4 +12,9 @@ public static class DomainConstants
 		public const int NameMaxLength = 20;
 		public const int DescriptionMaxLength = 30;
 	}
+
+	public static class User
+	{
+		public const int UserNameLength = 50;
+	}
 }

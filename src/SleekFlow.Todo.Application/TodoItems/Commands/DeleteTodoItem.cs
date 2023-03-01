@@ -37,7 +37,7 @@ internal sealed class DeleteTodoItemHandler : IRequestHandler<DeleteTodoItem, Er
 			return Errors.TodoItemErrors.NotFound(request.ItemId);
 		}
 
-		await _todoItemRepository.DeleteAsync(request.ItemId, cancellationToken);
+		await _todoItemRepository.DeleteAsync(todoItem, cancellationToken);
 
 		return Unit.Value;
 	}

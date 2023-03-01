@@ -10,21 +10,24 @@ namespace SleekFlow.Todo.Api.Controllers;
 [Produces(MediaTypeNames.Application.Json)]
 public abstract class AppControllerBase : ControllerBase
 {
+	private IMediator? _mediator;
+	protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<IMediator>(); 
+
 	protected IActionResult MapResponse<TResponse>(ErrorOr<TResponse> response)
 		=> response.MatchFirst(
-			result => Ok(ApiResponse.Success(result)),
+			result => Ok(ApiResponse<TResponse>.Success(result)),
 			error => HandleError(error));
 
 	protected IActionResult MapResponse(ErrorOr<Unit> response)
 		=> response.MatchFirst(
-			result => Ok(ApiResponse.Success(null)),
+			result => Ok(BaseApiResponse.Success()),
 			error => HandleError(error));
 
 	private IActionResult HandleError(ErrorOr.Error error)
 		=> error.Type switch
 		{
-			ErrorType.NotFound => NotFound(ApiResponse.Failure(error)),
-			ErrorType.Unexpected => StatusCode(500, ApiResponse.Failure(error)),
-			_ => BadRequest(ApiResponse.Failure(error))
+			ErrorType.NotFound => NotFound(BaseApiResponse.Failure(error)),
+			ErrorType.Unexpected => StatusCode(500, BaseApiResponse.Failure(error)),
+			_ => BadRequest(BaseApiResponse.Failure(error))
 		};
 }

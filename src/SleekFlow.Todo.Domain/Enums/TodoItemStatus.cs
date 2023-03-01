@@ -2,6 +2,6 @@
 
 public enum TodoItemStatus
 {
-	Pending,
-	Done
+	Pending = 1,
+	Done = 2
 }
