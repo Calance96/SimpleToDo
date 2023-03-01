@@ -11,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
 	options.SuppressModelStateInvalidFilter = true;
+	options.SuppressInferBindingSourcesForParameters = true;
 });
 
 builder.Services
