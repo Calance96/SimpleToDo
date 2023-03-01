@@ -16,14 +16,14 @@ internal static class EntityConfigurationExtensions
 			.HasMaxLength(DomainConstants.User.UserIdLength);
 
 		builder.Property(e => e.CreatedAt)
-			.HasColumnType("DATETIME");
+			.HasColumnType("DATETIMEOFFSET");
 
 		builder.Property(e => e.UpdatedBy)
 			.HasColumnType("VARCHAR")
 			.HasMaxLength(DomainConstants.User.UserIdLength);
 
 		builder.Property(e => e.UpdatedAt)
-			.HasColumnType("DATETIME");
+			.HasColumnType("DATETIMEOFFSET");
 	}
 
 	public static void ConfigureGuidKey<TEntity>(

@@ -24,7 +24,7 @@ internal sealed class TodoItemEntityConfiguration : IEntityTypeConfiguration<Tod
 			.HasMaxLength(DomainConstants.TodoItem.DescriptionMaxLength);
 
 		builder.Property(x => x.DueDate)
-			.HasColumnType("DATETIME");
+			.HasColumnType("DATETIMEOFFSET");
 
 		builder.Property(x => x.Status)
 			.HasColumnType("INTEGER")
