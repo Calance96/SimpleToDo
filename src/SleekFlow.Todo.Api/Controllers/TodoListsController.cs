@@ -7,6 +7,7 @@ using SleekFlow.Todo.Application.TodoLists.Dtos;
 
 namespace SleekFlow.Todo.Api.Controllers;
 
+[Route("api/todo-lists")]
 public sealed class TodoListsController : AppControllerBase
 {
 	[HttpGet]
