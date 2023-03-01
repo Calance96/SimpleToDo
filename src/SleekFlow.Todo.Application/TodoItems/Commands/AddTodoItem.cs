@@ -60,7 +60,7 @@ internal sealed class AddTodoItemHandler : IRequestHandler<AddTodoItem, ErrorOr<
 
 	public async Task<ErrorOr<TodoItemDto>> Handle(AddTodoItem request, CancellationToken cancellationToken)
 	{
-		TodoList todoList = await _todoListRepository.GetByIdAsync(request.ListId, cancellationToken);
+		TodoList? todoList = await _todoListRepository.GetByIdAsync(request.ListId, cancellationToken);
 
 		if (todoList is null)
 		{

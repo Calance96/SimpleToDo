@@ -39,7 +39,7 @@ internal sealed class UpdateTodoListHandler : IRequestHandler<UpdateTodoList, Er
 
 	public async Task<ErrorOr<Unit>> Handle(UpdateTodoList request, CancellationToken cancellationToken)
 	{
-		TodoList todoList = await _todoListRepository.GetByIdAsync(request.ListId, cancellationToken);
+		TodoList? todoList = await _todoListRepository.GetByIdAsync(request.ListId, cancellationToken);
 
 		if (todoList is null)
 		{

@@ -30,7 +30,7 @@ internal sealed class DeleteTodoItemHandler : IRequestHandler<DeleteTodoItem, Er
 
 	public async Task<ErrorOr<Unit>> Handle(DeleteTodoItem request, CancellationToken cancellationToken)
 	{
-		TodoItem todoItem = await _todoItemRepository.GetByIdAsync(request.ItemId, cancellationToken);
+		TodoItem? todoItem = await _todoItemRepository.GetByIdAsync(request.ItemId, cancellationToken);
 
 		if (todoItem is null)
 		{
