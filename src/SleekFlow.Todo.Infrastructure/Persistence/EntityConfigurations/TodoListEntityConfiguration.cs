@@ -21,6 +21,7 @@ internal sealed class TodoListEntityConfiguration : IEntityTypeConfiguration<Tod
 		builder.HasMany(x => x.Items)
 			.WithOne()
 			.HasConstraintName("FK_TodoItem_TodoList")
-			.HasForeignKey("ListId");
+			.HasForeignKey(i => i.ListId)
+			.IsRequired();
 	}
 }

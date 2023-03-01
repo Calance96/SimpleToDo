@@ -64,7 +64,7 @@ internal sealed class CreateTodoListHandler : IRequestHandler<CreateTodoList, Er
 			.ToList()
 			.ForEach(i => 
 			{
-				TodoItem todoItem = TodoItem.Create(i.Name, i.Description, i.DueDate);
+				TodoItem todoItem = TodoItem.Create(i.Name, i.Description, i.DueDate, todoList.Id);
 				todoList.Items.Add(todoItem);
 			});
 

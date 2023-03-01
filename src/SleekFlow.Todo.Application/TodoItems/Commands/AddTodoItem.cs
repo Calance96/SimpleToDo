@@ -70,7 +70,8 @@ internal sealed class AddTodoItemHandler : IRequestHandler<AddTodoItem, ErrorOr<
 		TodoItem todoItem = TodoItem.Create(
 			request.Item.Name,
 			request.Item.Description,
-			request.Item.DueDate);
+			request.Item.DueDate,
+			request.ListId);
 
 		await _todoItemRepository.AddAsync(todoItem, cancellationToken);
 

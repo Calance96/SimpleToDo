@@ -15,13 +15,16 @@ public sealed class TodoItem : AuditableEntity
 
 	public TodoItemStatus Status { get; private set; }
 
-	public static TodoItem Create(string name, string description, DateTimeOffset? dueDate)
+	public Guid ListId { get; private set; }
+
+	public static TodoItem Create(string name, string description, DateTimeOffset? dueDate, Guid listId)
 		=> new()
 		{
 			Id = Guid.NewGuid(),
 			Name = name,
 			Description = description,
 			DueDate = dueDate,
-			Status = TodoItemStatus.Pending
+			Status = TodoItemStatus.Pending,
+			ListId = listId
 		};
 }
