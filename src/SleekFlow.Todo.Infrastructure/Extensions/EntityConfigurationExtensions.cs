@@ -13,16 +13,32 @@ internal static class EntityConfigurationExtensions
 	{
 		builder.Property(e => e.CreatedBy)
 			.HasColumnType("VARCHAR")
-			.HasMaxLength(DomainConstants.User.UserNameLength);
+			.HasMaxLength(DomainConstants.User.UserIdLength);
 
 		builder.Property(e => e.CreatedAt)
 			.HasColumnType("DATETIME");
 
 		builder.Property(e => e.UpdatedBy)
 			.HasColumnType("VARCHAR")
-			.HasMaxLength(DomainConstants.User.UserNameLength);
+			.HasMaxLength(DomainConstants.User.UserIdLength);
 
 		builder.Property(e => e.UpdatedAt)
 			.HasColumnType("DATETIME");
+	}
+
+	public static void ConfigureGuidKey<TEntity>(
+		this EntityTypeBuilder<TEntity> builder,
+		Expression<Func<TEntity, object?>> keySelector,
+		string constraintName)
+		where TEntity : class
+	{
+		builder.HasKey(keySelector)
+			.HasName(constraintName)
+			.IsClustered();
+
+		builder.Property(keySelector)
+			.HasColumnType("VARCHAR")
+			.HasMaxLength(DomainConstants.User.UserIdLength)
+			.ValueGeneratedNever();
 	}
 }

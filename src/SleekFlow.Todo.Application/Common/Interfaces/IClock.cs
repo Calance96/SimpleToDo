@@ -2,5 +2,5 @@
 
 public interface IClock
 {
-	public DateTimeOffset CurrentTime { get; }
+	public DateTimeOffset Now { get; }
 }

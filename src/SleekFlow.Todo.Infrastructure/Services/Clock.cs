@@ -4,5 +4,5 @@ namespace SleekFlow.Todo.Infrastructure.Services;
 
 internal sealed class Clock : IClock
 {
-    public DateTimeOffset CurrentTime => DateTimeOffset.UtcNow;
+    public DateTimeOffset Now => DateTimeOffset.UtcNow;
 }

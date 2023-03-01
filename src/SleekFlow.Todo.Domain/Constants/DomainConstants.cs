@@ -15,6 +15,6 @@ public static class DomainConstants
 
 	public static class User
 	{
-		public const int UserNameLength = 50;
+		public const int UserIdLength = 36;
 	}
 }
