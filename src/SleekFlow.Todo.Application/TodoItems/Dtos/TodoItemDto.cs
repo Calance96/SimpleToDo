@@ -12,5 +12,5 @@ public sealed class TodoItemDto
 
     public DateTimeOffset? DueDate { get; private set; }
 
-    public TodoItemStatus Status { get; private set; }
+    public string Status { get; private set; }
 }
