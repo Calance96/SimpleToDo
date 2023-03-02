@@ -8,11 +8,11 @@ using SleekFlow.Todo.Application.TodoItems.Dtos;
 namespace SleekFlow.Todo.Api.Controllers;
 
 [Route("api/todo-items")]
-public sealed class TodoItemController : AppControllerBase
+public sealed class TodoItemsController : AppControllerBase
 {
 	private readonly IMediator _mediator;
 
-    public TodoItemController(IMediator mediator)
+    public TodoItemsController(IMediator mediator)
 		=> _mediator = mediator;
 
     [HttpPost]
