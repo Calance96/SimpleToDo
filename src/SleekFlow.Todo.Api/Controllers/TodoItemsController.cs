@@ -19,7 +19,7 @@ public sealed class TodoItemsController : AppControllerBase
 	[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<TodoItemDto>))]
 	[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BaseApiResponse))]
 	[ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(BaseApiResponse))]
-	public async Task<IActionResult> CreateTodoList([FromBody] AddTodoItemRequest request, CancellationToken cancellationToken)
+	public async Task<IActionResult> AddTodoItem([FromBody] AddTodoItemRequest request, CancellationToken cancellationToken)
 	{
 		ErrorOr<TodoItemDto> response = await _mediator.Send(request.ToCommand(), cancellationToken);
 
@@ -30,7 +30,7 @@ public sealed class TodoItemsController : AppControllerBase
 	[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BaseApiResponse))]
 	[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BaseApiResponse))]
 	[ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(BaseApiResponse))]
-	public async Task<IActionResult> UpdateTodoList(UpdateTodoItemRequest request, CancellationToken cancellationToken)
+	public async Task<IActionResult> UpdateTodoItem(UpdateTodoItemRequest request, CancellationToken cancellationToken)
 	{
 		ErrorOr<Unit> response = await _mediator.Send(request.ToCommand(), cancellationToken);
 
@@ -41,7 +41,7 @@ public sealed class TodoItemsController : AppControllerBase
 	[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BaseApiResponse))]
 	[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BaseApiResponse))]
 	[ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(BaseApiResponse))]
-	public async Task<IActionResult> DeleteTodoList(DeleteTodoItemRequest request, CancellationToken cancellationToken)
+	public async Task<IActionResult> DeleteTodoItem(DeleteTodoItemRequest request, CancellationToken cancellationToken)
 	{
 		ErrorOr<Unit> response = await _mediator.Send(request.ToCommand(), cancellationToken);
 
