@@ -4,13 +4,13 @@ namespace SleekFlow.Todo.Application.TodoItems.Dtos;
 
 public sealed class TodoItemDto
 {
-    public Guid Id { get; private set; }
+    public Guid Id { get; set; }
 
-    public string Name { get; private set; } = null!;
+    public string Name { get; set; } = null!;
 
-    public string Description { get; private set; } = null!;
+    public string Description { get; set; } = null!;
 
-    public DateTimeOffset? DueDate { get; private set; }
+    public DateTimeOffset? DueDate { get; set; }
 
-    public string Status { get; private set; }
+    public string Status { get; set; }
 }
