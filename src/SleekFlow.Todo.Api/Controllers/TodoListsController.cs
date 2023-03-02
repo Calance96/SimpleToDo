@@ -17,7 +17,6 @@ public sealed class TodoListsController : AppControllerBase
 
 	[HttpGet]
 	[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<List<TodoListDto>>))]
-	[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BaseApiResponse))]
 	[ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(BaseApiResponse))]
 	public async Task<IActionResult> GetTodoLists(CancellationToken cancellationToken)
 	{
