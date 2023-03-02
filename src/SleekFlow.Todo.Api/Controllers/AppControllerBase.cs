@@ -10,9 +10,6 @@ namespace SleekFlow.Todo.Api.Controllers;
 [Produces(MediaTypeNames.Application.Json)]
 public abstract class AppControllerBase : ControllerBase
 {
-	private IMediator? _mediator;
-	protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<IMediator>(); 
-
 	protected IActionResult MapResponse<TResponse>(ErrorOr<TResponse> response)
 		=> response.MatchFirst(
 			result => Ok(ApiResponse<TResponse>.Success(result)),

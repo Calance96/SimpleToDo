@@ -10,13 +10,18 @@ namespace SleekFlow.Todo.Api.Controllers;
 [Route("api/todo-items")]
 public sealed class TodoItemController : AppControllerBase
 {
-	[HttpPost]
+	private readonly IMediator _mediator;
+
+    public TodoItemController(IMediator mediator)
+		=> _mediator = mediator;
+
+    [HttpPost]
 	[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<TodoItemDto>))]
 	[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BaseApiResponse))]
 	[ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(BaseApiResponse))]
 	public async Task<IActionResult> CreateTodoList([FromBody] AddTodoItemRequest request, CancellationToken cancellationToken)
 	{
-		ErrorOr<TodoItemDto> response = await Mediator.Send(request.ToCommand(), cancellationToken);
+		ErrorOr<TodoItemDto> response = await _mediator.Send(request.ToCommand(), cancellationToken);
 
 		return MapResponse(response);
 	}
@@ -27,7 +32,7 @@ public sealed class TodoItemController : AppControllerBase
 	[ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(BaseApiResponse))]
 	public async Task<IActionResult> UpdateTodoList(UpdateTodoItemRequest request, CancellationToken cancellationToken)
 	{
-		ErrorOr<Unit> response = await Mediator.Send(request.ToCommand(), cancellationToken);
+		ErrorOr<Unit> response = await _mediator.Send(request.ToCommand(), cancellationToken);
 
 		return MapResponse(response);
 	}
@@ -38,7 +43,7 @@ public sealed class TodoItemController : AppControllerBase
 	[ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(BaseApiResponse))]
 	public async Task<IActionResult> DeleteTodoList(DeleteTodoItemRequest request, CancellationToken cancellationToken)
 	{
-		ErrorOr<Unit> response = await Mediator.Send(request.ToCommand(), cancellationToken);
+		ErrorOr<Unit> response = await _mediator.Send(request.ToCommand(), cancellationToken);
 
 		return MapResponse(response);
 	}

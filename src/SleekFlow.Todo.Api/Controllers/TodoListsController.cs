@@ -10,6 +10,11 @@ namespace SleekFlow.Todo.Api.Controllers;
 [Route("api/todo-lists")]
 public sealed class TodoListsController : AppControllerBase
 {
+	private readonly IMediator _mediator;
+
+	public TodoListsController(IMediator mediator)
+		=> _mediator = mediator;
+
 	[HttpGet]
 	[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<List<TodoListDto>>))]
 	[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BaseApiResponse))]
@@ -18,7 +23,7 @@ public sealed class TodoListsController : AppControllerBase
 	{
 		GetAllTodoListsRequest request = new(null);
 
-		ErrorOr<List<TodoListDto>> response = await Mediator.Send(request.ToQuery(), cancellationToken);
+		ErrorOr<List<TodoListDto>> response = await _mediator.Send(request.ToQuery(), cancellationToken);
 
 		return MapResponse(response);
 	}
@@ -29,7 +34,7 @@ public sealed class TodoListsController : AppControllerBase
 	[ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(BaseApiResponse))]
 	public async Task<IActionResult> CreateTodoList([FromBody] CreateTodoListRequest request, CancellationToken cancellationToken)
 	{
-		ErrorOr<TodoListDto> response = await Mediator.Send(request.ToCommand(), cancellationToken);
+		ErrorOr<TodoListDto> response = await _mediator.Send(request.ToCommand(), cancellationToken);
 
 		return MapResponse(response);
 	}
@@ -40,7 +45,7 @@ public sealed class TodoListsController : AppControllerBase
 	[ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(BaseApiResponse))]
 	public async Task<IActionResult> UpdateTodoList(UpdateTodoListRequest request, CancellationToken cancellationToken)
 	{
-		ErrorOr<Unit> response = await Mediator.Send(request.ToCommand(), cancellationToken);
+		ErrorOr<Unit> response = await _mediator.Send(request.ToCommand(), cancellationToken);
 
 		return MapResponse(response);
 	}
@@ -51,7 +56,7 @@ public sealed class TodoListsController : AppControllerBase
 	[ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(BaseApiResponse))]
 	public async Task<IActionResult> DeleteTodoList(DeleteTodoListRequest request, CancellationToken cancellationToken)
 	{
-		ErrorOr<Unit> response = await Mediator.Send(request.ToCommand(), cancellationToken);
+		ErrorOr<Unit> response = await _mediator.Send(request.ToCommand(), cancellationToken);
 
 		return MapResponse(response);
 	}
