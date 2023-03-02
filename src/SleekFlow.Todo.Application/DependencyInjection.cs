@@ -3,7 +3,9 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using SleekFlow.Todo.Application.Common.Behaviors;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("SleekFlow.Todo.Application.UnitTests")]
 namespace SleekFlow.Todo.Application;
 
 public static class DependencyInjection
