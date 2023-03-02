@@ -1,10 +1,4 @@
-﻿using Azure.Core;
-using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
-using Shouldly;
-using SleekFlow.Todo.Api.Contracts.Requests.TodoLists;
+﻿using Microsoft.AspNetCore.Mvc;
 using SleekFlow.Todo.Api.Contracts.Responses;
 using SleekFlow.Todo.Api.Controllers;
 using SleekFlow.Todo.Api.UnitTests.Extensions;
@@ -13,11 +7,6 @@ using SleekFlow.Todo.Application.TodoItems.Dtos;
 using SleekFlow.Todo.Application.TodoLists.Dtos;
 using SleekFlow.Todo.Application.TodoLists.Queries;
 using SleekFlow.Todo.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SleekFlow.Todo.Api.UnitTests.ControllerTests.TodoListsControllerTests;
 

@@ -1,9 +1,5 @@
 ﻿using Mapster;
-using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Moq;
-using Shouldly;
 using SleekFlow.Todo.Api.Contracts.Requests.TodoLists;
 using SleekFlow.Todo.Api.Contracts.Responses;
 using SleekFlow.Todo.Api.Controllers;
