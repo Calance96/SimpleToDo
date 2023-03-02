@@ -7,15 +7,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A27D1EBB-AA7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{53044518-0D2E-4DF9-BF1E-6387014AB120}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SleekFlow.Todo.Api", "src\SleekFlow.Todo.Api\SleekFlow.Todo.Api.csproj", "{ACF44CC9-6C0D-4618-BABF-8FC6D93E6451}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SleekFlow.Todo.Api", "src\SleekFlow.Todo.Api\SleekFlow.Todo.Api.csproj", "{ACF44CC9-6C0D-4618-BABF-8FC6D93E6451}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SleekFlow.Todo.Application", "src\SleekFlow.Todo.Application\SleekFlow.Todo.Application.csproj", "{CD220B27-56FB-4179-99EA-E1ACD5D3FE0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SleekFlow.Todo.Application", "src\SleekFlow.Todo.Application\SleekFlow.Todo.Application.csproj", "{CD220B27-56FB-4179-99EA-E1ACD5D3FE0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SleekFlow.Todo.Infrastructure", "src\SleekFlow.Todo.Infrastructure\SleekFlow.Todo.Infrastructure.csproj", "{82E1F5DA-F3D0-432C-A243-8C6C38B99CFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SleekFlow.Todo.Infrastructure", "src\SleekFlow.Todo.Infrastructure\SleekFlow.Todo.Infrastructure.csproj", "{82E1F5DA-F3D0-432C-A243-8C6C38B99CFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SleekFlow.Todo.Domain", "src\SleekFlow.Todo.Domain\SleekFlow.Todo.Domain.csproj", "{BEA8A9CE-4260-4917-B7CF-790EE9232506}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SleekFlow.Todo.Domain", "src\SleekFlow.Todo.Domain\SleekFlow.Todo.Domain.csproj", "{BEA8A9CE-4260-4917-B7CF-790EE9232506}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SleekFlow.Todo.Application.UnitTests", "tests\SleekFlow.Todo.Application.UnitTests\SleekFlow.Todo.Application.UnitTests.csproj", "{EB95B60E-0555-4A56-B322-E1153AAF384A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SleekFlow.Todo.Application.UnitTests", "tests\SleekFlow.Todo.Application.UnitTests\SleekFlow.Todo.Application.UnitTests.csproj", "{EB95B60E-0555-4A56-B322-E1153AAF384A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SleekFlow.Todo.Api.UnitTests", "tests\SleekFlow.Todo.Api.UnitTests\SleekFlow.Todo.Api.UnitTests.csproj", "{DD578E4F-AA17-49C7-9182-007396BB60E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{EB95B60E-0555-4A56-B322-E1153AAF384A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB95B60E-0555-4A56-B322-E1153AAF384A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB95B60E-0555-4A56-B322-E1153AAF384A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD578E4F-AA17-49C7-9182-007396BB60E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD578E4F-AA17-49C7-9182-007396BB60E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD578E4F-AA17-49C7-9182-007396BB60E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD578E4F-AA17-49C7-9182-007396BB60E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{82E1F5DA-F3D0-432C-A243-8C6C38B99CFD} = {A27D1EBB-AA73-4F49-BB57-A336F8443A99}
 		{BEA8A9CE-4260-4917-B7CF-790EE9232506} = {A27D1EBB-AA73-4F49-BB57-A336F8443A99}
 		{EB95B60E-0555-4A56-B322-E1153AAF384A} = {53044518-0D2E-4DF9-BF1E-6387014AB120}
+		{DD578E4F-AA17-49C7-9182-007396BB60E1} = {53044518-0D2E-4DF9-BF1E-6387014AB120}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E3B59F28-A8CD-40EB-9928-AA827A143264}
