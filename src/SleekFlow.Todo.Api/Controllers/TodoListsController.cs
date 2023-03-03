@@ -18,10 +18,8 @@ public sealed class TodoListsController : AppControllerBase
 	[HttpGet]
 	[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<List<TodoListDto>>))]
 	[ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(BaseApiResponse))]
-	public async Task<IActionResult> GetTodoLists(CancellationToken cancellationToken)
+	public async Task<IActionResult> GetTodoLists([FromQuery] GetAllTodoListsRequest request, CancellationToken cancellationToken)
 	{
-		GetAllTodoListsRequest request = new(null);
-
 		ErrorOr<List<TodoListDto>> response = await _mediator.Send(request.ToQuery(), cancellationToken);
 
 		return MapResponse(response);

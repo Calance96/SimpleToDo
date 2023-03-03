@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SleekFlow.Todo.Api.Contracts.Requests.TodoLists;
 using SleekFlow.Todo.Api.Contracts.Responses;
 using SleekFlow.Todo.Api.Controllers;
 using SleekFlow.Todo.Api.UnitTests.Extensions;
@@ -32,7 +33,7 @@ public sealed class GetTodoListTests
 			.ReturnsAsync(expectedResponse.Data!);
 
 		// Act
-		IActionResult response = await _controller.GetTodoLists(new CancellationToken());
+		IActionResult response = await _controller.GetTodoLists(new GetAllTodoListsRequest(null, null), new CancellationToken());
 
 		// Assert
 		response.ShouldBeOkObjectResult(typeof(ApiResponse<List<TodoListDto>>), expectedResponse);
@@ -49,7 +50,7 @@ public sealed class GetTodoListTests
 			.ReturnsAsync(expectedResponse.Data!);
 
 		// Act
-		IActionResult response = await _controller.GetTodoLists(new CancellationToken());
+		IActionResult response = await _controller.GetTodoLists(new GetAllTodoListsRequest(null, null), new CancellationToken());
 
 		// Assert
 		response.ShouldBeOkObjectResult(typeof(ApiResponse<List<TodoListDto>>), expectedResponse);
@@ -66,7 +67,7 @@ public sealed class GetTodoListTests
 			.ReturnsAsync(Errors.GeneralErrors.GeneralUnexpectedError);
 
 		// Act
-		IActionResult response = await _controller.GetTodoLists(new CancellationToken());
+		IActionResult response = await _controller.GetTodoLists(new GetAllTodoListsRequest(null, null), new CancellationToken());
 
 		// Assert
 		response.ShouldBeInternalServerErrorObjectResult(typeof(BaseApiResponse), expectedResponse);

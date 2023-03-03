@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using SleekFlow.Todo.Application.Common.Enums;
 using SleekFlow.Todo.Application.Common.Interfaces;
 using SleekFlow.Todo.Application.TodoItems.Dtos;
 using SleekFlow.Todo.Application.TodoLists.Dtos;
@@ -33,12 +34,60 @@ public class GetTodoListsTests
             .ReturnsAsync(sampleData);
 
         // Act
-        ErrorOr<List<TodoListDto>> response = await _handler.Handle(new GetAllTodoLists(null), new CancellationToken());
+        ErrorOr<List<TodoListDto>> response = await _handler.Handle(new GetAllTodoLists(null, null), new CancellationToken());
 
         // Assert
         response.IsError.ShouldBeFalse();
         response.Value.ShouldBeEquivalentTo(expected);
     }
+
+	[Fact]
+	public async Task Handle_SortTitleDesc_ReturnsTodoListsInCorrectOrder()
+	{
+		// Arrange
+		List<TodoList> sampleData = GetTodoListsSampleData(5);
+		List<TodoListDto> expected = sampleData
+			.Adapt<List<TodoListDto>>()
+			.OrderByDescending(x => x.Title)
+			.ToList();
+
+		_todoListRepository
+			.Setup(x => x.GetAllAsync(It.IsAny<CancellationToken>()))
+			.ReturnsAsync(sampleData);
+
+		// Act
+		ErrorOr<List<TodoListDto>> response = await _handler.Handle(
+			new GetAllTodoLists(TodoListSortableField.Title.ToString(), SortOrder.Desc.ToString()), 
+			new CancellationToken());
+
+		// Assert
+		response.IsError.ShouldBeFalse();
+		response.Value.ShouldBeEquivalentTo(expected);
+	}
+
+	[Fact]
+	public async Task Handle_SortDateAsc_ReturnsTodoListsInCorrectOrder()
+	{
+		// Arrange
+		List<TodoList> sampleData = GetTodoListsSampleData(5);
+		List<TodoListDto> expected = sampleData
+			.Adapt<List<TodoListDto>>()
+			.OrderBy(x => x.CreatedAt)
+			.ToList();
+
+		_todoListRepository
+			.Setup(x => x.GetAllAsync(It.IsAny<CancellationToken>()))
+			.ReturnsAsync(sampleData);
+
+		// Act
+		ErrorOr<List<TodoListDto>> response = await _handler.Handle(
+			new GetAllTodoLists(TodoListSortableField.Date.ToString(), SortOrder.Asc.ToString()),
+			new CancellationToken());
+
+		// Assert
+		response.IsError.ShouldBeFalse();
+		response.Value.ShouldBeEquivalentTo(expected);
+	}
 
 	[Fact]
 	public async Task Handle_OnNoData_ReturnsEmptyList()
@@ -51,11 +100,11 @@ public class GetTodoListsTests
 			.ReturnsAsync(new List<TodoList>());
 
 		// Act
-		ErrorOr<List<TodoListDto>> response = await _handler.Handle(new GetAllTodoLists(null), new CancellationToken());
+		ErrorOr<List<TodoListDto>> response = await _handler.Handle(new GetAllTodoLists(null, null), new CancellationToken());
 
 		// Assert
 		response.IsError.ShouldBeFalse();
-		response.Value.ShouldBeEquivalentTo(expected);
+		response.Value.ShouldBe(expected);
 	}
 
 	private static List<TodoList> GetTodoListsSampleData(int size = 1)
@@ -63,6 +112,9 @@ public class GetTodoListsTests
 			.Select(i =>
             {
                 TodoList todoList = TodoList.Create($"title {i}");
+				todoList.CreatedAt = DateTimeOffset.UtcNow.AddSeconds(new Random().Next(10));
+				todoList.CreatedBy = "some user";
+
                 todoList.Items.Add(TodoItem.Create($"item {i}", $"item description {i}", null, todoList.Id));
 
                 return todoList;
