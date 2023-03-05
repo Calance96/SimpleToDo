@@ -1,6 +1,7 @@
 ﻿using ErrorOr;
 using FluentValidation;
 using Mapster;
+using MapsterMapper;
 using MediatR;
 using SleekFlow.Todo.Application.Common.Exceptions;
 using SleekFlow.Todo.Application.Common.Extensions;
@@ -67,7 +68,11 @@ internal sealed class UpdateTodoItemHandler : IRequestHandler<UpdateTodoItem, Er
 			return Errors.TodoItemErrors.NotFound(request.ItemId);
 		}
 
-		todoItem = request.Adapt<TodoItem>();
+		todoItem.UpdateFrom(
+			request.Name,
+			request.Description,
+			request.Status.GetValueOrDefault(TodoItemStatus.Pending),
+			request.DueDate);
 
 		await _todoItemRepository.UpdateAsync(todoItem, cancellationToken);
 

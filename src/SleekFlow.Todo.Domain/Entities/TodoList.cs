@@ -14,4 +14,7 @@ public sealed class TodoList : AuditableEntity
 			Id = Guid.NewGuid(),
 			Title = title
 		};
+
+	public void UpdateTitle(string title)
+		=> Title = title;
 }

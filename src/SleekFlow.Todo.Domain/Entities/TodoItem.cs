@@ -27,4 +27,12 @@ public sealed class TodoItem : AuditableEntity
 			Status = TodoItemStatus.Pending,
 			ListId = listId
 		};
+
+	public void UpdateFrom(string name, string description, TodoItemStatus status, DateTimeOffset? dueDate)
+	{
+		Name = name;
+		Description = description;
+		Status = status;
+		DueDate = dueDate;
+	}
 }

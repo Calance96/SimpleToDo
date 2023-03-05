@@ -46,7 +46,7 @@ internal sealed class UpdateTodoListHandler : IRequestHandler<UpdateTodoList, Er
 			return Errors.TodoListErrors.NotFound(request.ListId);
 		}
 
-		todoList = request.Adapt<TodoList>();
+		todoList.UpdateTitle(request.Title);
 
 		await _todoListRepository.UpdateAsync(todoList, cancellationToken);
 
