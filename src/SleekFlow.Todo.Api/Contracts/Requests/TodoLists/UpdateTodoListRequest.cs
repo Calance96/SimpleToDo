@@ -6,7 +6,7 @@ namespace SleekFlow.Todo.Api.Contracts.Requests.TodoLists;
 
 public sealed class UpdateTodoListRequest : ICommand<UpdateTodoList>
 {
-	[FromRoute]
+	[FromRoute(Name = "listId")]
 	public Guid ListId { get; init; }
 
 	[FromBody]

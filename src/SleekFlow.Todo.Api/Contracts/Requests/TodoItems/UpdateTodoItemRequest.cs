@@ -7,7 +7,7 @@ namespace SleekFlow.Todo.Api.Contracts.Requests.TodoItems;
 
 public sealed class UpdateTodoItemRequest : ICommand<UpdateTodoItem>
 {
-	[FromRoute]
+	[FromRoute(Name = "itemId")]
 	public Guid ItemId { get; init; }
 
 	[FromBody]
