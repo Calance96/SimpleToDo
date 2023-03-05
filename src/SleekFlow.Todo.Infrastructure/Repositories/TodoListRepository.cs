@@ -19,6 +19,7 @@ internal sealed class TodoListRepository : GenericRepository<TodoList>, ITodoLis
 	public Task<List<TodoList>> GetAllAsync(CancellationToken cancellationToken)
 		=> _context
 			.TodoLists
+			.Where(list => list.CreatedBy == _currentUserService.UserId)
 			.Include(list => list.Items)
 			.AsNoTrackingWithIdentityResolution()
 			.ToListAsync(cancellationToken);
