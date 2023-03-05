@@ -20,6 +20,7 @@ internal class AppUser : AuditableEntity
 			UserName = userName
 		};
 
+		newUser.CreatedBy = newUser.Id.ToString();
 		string hashedPassword = passwordHasher.HashPassword(newUser, password);
 
 		newUser.UpdatePasswordHash(hashedPassword);

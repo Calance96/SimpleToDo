@@ -36,19 +36,19 @@ internal sealed class AuditableEntitySaveChangesInterceptor : SaveChangesInterce
 			return;
 		}
 
-		string userId = _currentUserService.UserId ?? "test-user";
+		string userId = _currentUserService.UserId ?? "system";
 
 		foreach (EntityEntry<AuditableEntity> entityEntry in context.ChangeTracker.Entries<AuditableEntity>())
 		{
 			if (entityEntry.State is EntityState.Added)
 			{
 				entityEntry.Entity.CreatedAt = _clock.Now;
-				entityEntry.Entity.CreatedBy = userId;
+				entityEntry.Entity.CreatedBy ??= userId;
 			}
 			else if (entityEntry.State is EntityState.Modified)
 			{
 				entityEntry.Entity.UpdatedAt = _clock.Now;
-				entityEntry.Entity.UpdatedBy = userId;
+				entityEntry.Entity.UpdatedBy ??= userId;
 			}
 		}
 	}

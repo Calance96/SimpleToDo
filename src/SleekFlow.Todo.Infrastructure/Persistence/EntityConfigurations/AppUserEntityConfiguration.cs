@@ -17,6 +17,10 @@ internal sealed class AppUserEntityConfiguration : IEntityTypeConfiguration<AppU
 			.HasColumnType("NVARCHAR")
 			.HasMaxLength(256);
 
+		builder.HasIndex(x => x.UserName)
+			.HasDatabaseName("UC_AppUsers_UserName")
+			.IsUnique();
+
 		builder.Property(x => x.PasswordHash)
 			.HasColumnType("NVARCHAR(MAX)");
 	}
