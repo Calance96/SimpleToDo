@@ -17,6 +17,12 @@ public sealed class TodoListsController : AppControllerBase
 	public TodoListsController(IMediator mediator)
 		=> _mediator = mediator;
 
+	/// <summary>
+	/// Get all todo lists for current user
+	/// </summary>
+	/// <param name="request"></param>
+	/// <param name="cancellationToken"></param>
+	/// <returns>List of todo lists</returns>
 	[HttpGet]
 	[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<List<TodoListDto>>))]
 	[ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(BaseApiResponse))]
@@ -27,6 +33,12 @@ public sealed class TodoListsController : AppControllerBase
 		return MapResponse(response);
 	}
 
+	/// <summary>
+	/// Create a new todo list
+	/// </summary>
+	/// <param name="request"></param>
+	/// <param name="cancellationToken"></param>
+	/// <returns>The created todo list</returns>
 	[HttpPost]
 	[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<TodoListDto>))]
 	[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BaseApiResponse))]
@@ -38,6 +50,12 @@ public sealed class TodoListsController : AppControllerBase
 		return MapResponse(response);
 	}
 
+	/// <summary>
+	/// Update an existing todo list
+	/// </summary>
+	/// <param name="request"></param>
+	/// <param name="cancellationToken"></param>
+	/// <returns></returns>
 	[HttpPut("{listId:guid}")]
 	[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BaseApiResponse))]
 	[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BaseApiResponse))]
@@ -49,6 +67,12 @@ public sealed class TodoListsController : AppControllerBase
 		return MapResponse(response);
 	}
 
+	/// <summary>
+	/// Delete an existing todo list
+	/// </summary>
+	/// <param name="request"></param>
+	/// <param name="cancellationToken"></param>
+	/// <returns></returns>
 	[HttpDelete("{listId:guid}")]
 	[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BaseApiResponse))]
 	[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BaseApiResponse))]

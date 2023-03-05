@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using SleekFlow.Todo.Api.Filters;
 using SleekFlow.Todo.Api.Services;
 using SleekFlow.Todo.Application;
 using SleekFlow.Todo.Application.Common.Interfaces;
 using SleekFlow.Todo.Infrastructure;
+using System.Reflection;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +41,10 @@ builder.Services
 		});
 
 		opts.OperationFilter<SwaggerSecurityOperationFilter>();
+
+		var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+		var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+		opts.IncludeXmlComments(xmlPath);
 	})
 	.AddHttpContextAccessor();
 

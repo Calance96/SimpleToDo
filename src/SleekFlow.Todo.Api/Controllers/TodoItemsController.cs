@@ -17,6 +17,12 @@ public sealed class TodoItemsController : AppControllerBase
     public TodoItemsController(IMediator mediator)
 		=> _mediator = mediator;
 
+	/// <summary>
+	/// Add new todo item to an existing todo list
+	/// </summary>
+	/// <param name="request"></param>
+	/// <param name="cancellationToken"></param>
+	/// <returns>The added todo item</returns>
     [HttpPost]
 	[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<TodoItemDto>))]
 	[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BaseApiResponse))]
@@ -28,6 +34,13 @@ public sealed class TodoItemsController : AppControllerBase
 		return MapResponse(response);
 	}
 
+
+	/// <summary>
+	/// Update an existing todo item
+	/// </summary>
+	/// <param name="request"></param>
+	/// <param name="cancellationToken"></param>
+	/// <returns></returns>
 	[HttpPut("{itemId:guid}")]
 	[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BaseApiResponse))]
 	[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BaseApiResponse))]
@@ -39,6 +52,12 @@ public sealed class TodoItemsController : AppControllerBase
 		return MapResponse(response);
 	}
 
+	/// <summary>
+	/// Remove an existing todo item
+	/// </summary>
+	/// <param name="request"></param>
+	/// <param name="cancellationToken"></param>
+	/// <returns></returns>
 	[HttpDelete("{itemId:guid}")]
 	[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BaseApiResponse))]
 	[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BaseApiResponse))]

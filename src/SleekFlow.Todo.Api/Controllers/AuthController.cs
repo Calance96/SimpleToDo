@@ -15,6 +15,12 @@ public sealed class AuthController : AppControllerBase
 	public AuthController(IMediator mediator)
 		=> _mediator = mediator;
 
+	/// <summary>
+	/// To register new user 
+	/// </summary>
+	/// <param name="request"></param>
+	/// <param name="cancellationToken"></param>
+	/// <returns>Access token</returns>
 	[HttpPost("register")]
 	[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<TokenResponseDto>))]
 	[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BaseApiResponse))]
@@ -26,6 +32,12 @@ public sealed class AuthController : AppControllerBase
 		return MapResponse(response);
 	}
 
+	/// <summary>
+	/// To login with existing user
+	/// </summary>
+	/// <param name="request"></param>
+	/// <param name="cancellationToken"></param>
+	/// <returns>Access token</returns>
 	[HttpPost("login")]
 	[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<TokenResponseDto>))]
 	[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BaseApiResponse))]
