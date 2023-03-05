@@ -72,7 +72,7 @@ public class GetTodoListsTests
 		List<TodoList> sampleData = GetTodoListsSampleData(5);
 		List<TodoListDto> expected = sampleData
 			.Adapt<List<TodoListDto>>()
-			.OrderBy(x => x.CreatedAt)
+			.OrderBy(x => x.LastModifiedAt)
 			.ToList();
 
 		_todoListRepository
