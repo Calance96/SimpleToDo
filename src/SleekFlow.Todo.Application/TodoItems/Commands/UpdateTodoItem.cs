@@ -3,6 +3,7 @@ using FluentValidation;
 using Mapster;
 using MediatR;
 using SleekFlow.Todo.Application.Common.Exceptions;
+using SleekFlow.Todo.Application.Common.Extensions;
 using SleekFlow.Todo.Application.Common.Interfaces;
 using SleekFlow.Todo.Domain.Constants;
 using SleekFlow.Todo.Domain.Entities;
@@ -41,7 +42,7 @@ internal sealed class UpdateTodoItemValidator : AbstractValidator<UpdateTodoItem
 
 		RuleFor(request => request.Status)
 			.Must(status => status.HasValue)
-				.WithMessage("{PropertyName} must be provided.");
+				.WithMessage($"{{PropertyName}} must have a valid status. e.g. {typeof(TodoItemStatus).GetCommaSeparatedEnumValues()}");
 
 		RuleFor(request => request.DueDate)
 			.Must(dueDate => dueDate!.Value >= DateTimeOffset.UtcNow)
