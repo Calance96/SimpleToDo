@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using SleekFlow.Todo.Api.Filters;
+using SleekFlow.Todo.Api.Middlewares;
 using SleekFlow.Todo.Api.Services;
 using SleekFlow.Todo.Application;
 using SleekFlow.Todo.Application.Common.Interfaces;
@@ -49,9 +50,12 @@ builder.Services
 	.AddHttpContextAccessor();
 
 builder.Services
+	.AddScoped<ExceptionHandlingMiddleware>()
 	.AddScoped<ICurrentUserService, CurrentUserService>();
 
 WebApplication app = builder.Build();
+
+app.UseGlobalExceptionHandling();
 
 if (app.Environment.IsDevelopment())
 {
