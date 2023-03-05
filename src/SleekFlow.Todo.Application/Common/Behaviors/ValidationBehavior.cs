@@ -6,8 +6,9 @@ using SleekFlow.Todo.Application.Common.Exceptions;
 
 namespace SleekFlow.Todo.Application.Common.Behaviors;
 
-internal sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, ErrorOr<TResponse>>
-	where TRequest : IRequest<ErrorOr<TResponse>>
+internal sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+	where TRequest : IRequest<TResponse>
+	where TResponse : IErrorOr
 {
 	private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -16,7 +17,7 @@ internal sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavio
 		_validators = validators;
 	}
 
-	public async Task<ErrorOr<TResponse>> Handle(TRequest request, RequestHandlerDelegate<ErrorOr<TResponse>> next, CancellationToken cancellationToken)
+	public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
 	{
 		IEnumerable<Task<ValidationResult>> validationTasks = _validators
 			.Select(v => v.ValidateAsync(request, cancellationToken));
@@ -30,9 +31,9 @@ internal sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavio
 				.Errors
 				.First();
 
-			string errorCode = string.IsNullOrWhiteSpace(validationFailure.ErrorCode) ? Errors.GeneralErrors.GeneralValidationErrorCode : validationFailure.ErrorCode;
+			string errorCode = Errors.GeneralErrors.GeneralValidationErrorCode;
 
-			return Error.Validation(errorCode, validationFailure.ErrorMessage);
+			return (TResponse)(dynamic)Error.Validation(errorCode, validationFailure.ErrorMessage);
 		}
 
 		return await next();
