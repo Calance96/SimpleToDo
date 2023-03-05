@@ -65,10 +65,10 @@ internal sealed class GetAllTodoListsHandler : IRequestHandler<GetAllTodoLists, 
 					.ToList(),
 			(TodoListSortableField.Date, SortOrder.Asc)
 				=> todoLists
-					.OrderBy(l => l.UpdatedAt)
-					.ThenBy(l => l.CreatedAt).ToList(),
+					.OrderBy(l => l.LastModifiedAt)
+					.ToList(),
 			_ => todoLists
-					.OrderByDescending(l => l.UpdatedAt)
-					.ThenByDescending(l => l.CreatedAt).ToList(),
+					.OrderByDescending(l => l.LastModifiedAt)
+					.ToList(),
 		};
 }
