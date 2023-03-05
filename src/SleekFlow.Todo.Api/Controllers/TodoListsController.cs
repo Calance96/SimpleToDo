@@ -1,5 +1,6 @@
 ﻿using ErrorOr;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SleekFlow.Todo.Api.Contracts.Requests.TodoLists;
 using SleekFlow.Todo.Api.Contracts.Responses;
@@ -7,6 +8,7 @@ using SleekFlow.Todo.Application.TodoLists.Dtos;
 
 namespace SleekFlow.Todo.Api.Controllers;
 
+[Authorize]
 [Route("api/todo-lists")]
 public sealed class TodoListsController : AppControllerBase
 {

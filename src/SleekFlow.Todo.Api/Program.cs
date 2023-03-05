@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
+using SleekFlow.Todo.Api.Filters;
 using SleekFlow.Todo.Api.Services;
 using SleekFlow.Todo.Application;
 using SleekFlow.Todo.Application.Common.Interfaces;
@@ -18,12 +20,29 @@ builder.Services
 	.RegisterApplicationServices()
 	.RegisterInfrastructureServices(builder.Configuration)
 	.AddEndpointsApiExplorer()
-	.AddSwaggerGen()
+	.AddSwaggerGen(opts =>
+	{
+		opts.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+		{
+			Name = "Authorization",
+			Description = "JWT token authentication scheme",
+			BearerFormat = "Bearer {token}",
+			In = ParameterLocation.Header,
+			Type = SecuritySchemeType.Http,
+			Scheme = "bearer",
+			Reference = new()
+			{
+				Id = "Bearer",
+				Type = ReferenceType.SecurityScheme
+			}
+		});
+
+		opts.OperationFilter<SwaggerSecurityOperationFilter>();
+	})
 	.AddHttpContextAccessor();
 
 builder.Services
 	.AddScoped<ICurrentUserService, CurrentUserService>();
-
 
 WebApplication app = builder.Build();
 
@@ -35,6 +54,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

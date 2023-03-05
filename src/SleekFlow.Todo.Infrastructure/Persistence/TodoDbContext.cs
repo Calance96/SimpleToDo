@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SleekFlow.Todo.Domain.Entities;
+using SleekFlow.Todo.Infrastructure.Identities;
 using SleekFlow.Todo.Infrastructure.Persistence.Interceptors;
 using System.Reflection;
 
@@ -16,8 +17,9 @@ internal sealed class TodoDbContext : DbContext
 		_auditableEntitySaveChangesInterceptor = auditableEntitySaveChangesInterceptor;
 	}
 
-    public DbSet<TodoItem> TodoItems { get; private set; }
-    public DbSet<TodoList> TodoLists { get; private set; }
+	public DbSet<TodoItem> TodoItems { get; private set; } = null!;
+    public DbSet<TodoList> TodoLists { get; private set; } = null!;
+	public DbSet<AppUser> Users { get; private set; } = null!;
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{

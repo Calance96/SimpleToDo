@@ -21,4 +21,10 @@ public static class Errors
 	{
 		public static Error NotFound(Guid itemId) => Error.NotFound(ItemNotFound, $"Todo item of ID '{itemId}' not found.");
 	}
+
+	public static class AuthErrors
+	{
+		public static Error UserAlreadyExists(string userName) => Error.Failure("registration_failure", $"Registration with {userName} was unsuccessful.");
+		public static Error LoginFailure => Error.Failure("login_failure", "Login was unsuccessful.");
+	}
 }
