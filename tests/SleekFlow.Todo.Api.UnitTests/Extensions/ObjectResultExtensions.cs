@@ -1,8 +1,5 @@
-﻿using Azure;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Shouldly;
-using SleekFlow.Todo.Api.Contracts.Responses;
 
 namespace SleekFlow.Todo.Api.UnitTests.Extensions;
 
