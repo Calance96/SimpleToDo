@@ -12,6 +12,8 @@ public static class DependencyInjection
 {
 	public static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
 	{
+		ValidatorOptions.Global.DisplayNameResolver = (type, member, expression) => member?.Name;
+
 		services
 			.AddMediatR(config =>
 				config
