@@ -8,9 +8,13 @@ namespace SleekFlow.Todo.Infrastructure.Repositories;
 internal sealed class TodoListRepository : GenericRepository<TodoList>, ITodoListRepository
 {
 	private readonly TodoDbContext _context;
+	private readonly ICurrentUserService _currentUserService;
 
-	public TodoListRepository(TodoDbContext context) : base(context)
-		=> _context = context;
+	public TodoListRepository(TodoDbContext context, ICurrentUserService currentUserService) : base(context)
+	{
+		_context = context;
+		_currentUserService = currentUserService;
+	}
 
 	public Task<List<TodoList>> GetAllAsync(CancellationToken cancellationToken)
 		=> _context
@@ -24,5 +28,7 @@ internal sealed class TodoListRepository : GenericRepository<TodoList>, ITodoLis
 			.TodoLists
 			.Include(list => list.Items)
 			.AsNoTrackingWithIdentityResolution()
-			.FirstOrDefaultAsync(list => list.Id == listId, cancellationToken);
+			.FirstOrDefaultAsync(list => 
+				list.Id == listId &&
+				list.CreatedBy == _currentUserService.UserId, cancellationToken);
 }
