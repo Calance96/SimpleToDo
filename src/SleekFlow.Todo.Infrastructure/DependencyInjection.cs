@@ -46,6 +46,11 @@ public static class DependencyInjection
 				builder.UseSqlServer(configuration.GetConnectionString("TodoListDatabase")!);
 			});
 
+		if (configuration.GetValue<bool?>("EnableAutoMigration") ?? false)
+		{
+			services.AddHostedService<DbAutoMigrator>();
+		}
+
 		services
 			.Configure<TokenConfiguration>(configuration.GetRequiredSection(TokenConfiguration.Section));
 
